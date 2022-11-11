@@ -1,14 +1,13 @@
 import './styles/globals.css';
 import { Configuration, OpenAIApi } from 'openai';
 import { useState } from 'react';
+import previewImage from './img/imgb.png';
 
 function App() {
   const [prompt, setPrompt] = useState('');
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
-  const [placeholder, setPlaceholder] = useState(
-    'Search Bears with Paint Brushes the Starry Night, painted by Vincent Van Gogh..'
-  );
+  const [placeholder, setPlaceholder] = useState('Keywords...');
 
   const configuration = new Configuration({
     apiKey: process.env.REACT_APP_OPEN_AI_KEY,
@@ -29,38 +28,57 @@ function App() {
   };
 
   return (
-    <div className="app-main">
-      {loading ? (
-        <>
-          <h2>Generating..Please Wait..</h2>
-          <div className="lds-ripple">
-            <div></div>
-            <div></div>
-          </div>
-        </>
-      ) : (
-        <>
-          <h2 className="text-5xl font-bold underline bg-slate-300">
-            Generate an Image using Open AI API
-          </h2>
-
-          <textarea
-            className="app-input"
-            placeholder={placeholder}
-            onChange={(e) => setPrompt(e.target.value)}
-            rows="10"
-            cols="40"
-          />
-          <button onClick={generateImage}>Generate an Image</button>
-          <div className="max-w-3xl">
-            {result.length > 0 ? (
-              <img className="max-w-full" src={result} alt="result" />
-            ) : (
-              <></>
-            )}
-          </div>
-        </>
-      )}
+    <div className="w-full flex justify-center content-center items-center ">
+      <div className="max-w-2xl flex flex-col justify-center  p-5">
+        {loading ? (
+          <>
+            <h2>Generating..Please Wait..</h2>
+            <div className="lds-ripple">
+              <div></div>
+              <div></div>
+            </div>
+          </>
+        ) : (
+          <>
+            <h2 className="text-3xl text-left sm:font-sans font-extrabold sm:text-5xl ">
+              A<span className="text-purple">I</span> IMAGE GENERATOR
+            </h2>
+            <div className="my-5 pl-2 w-full font-sans flex flex-col items-start border-l-4 border-purple">
+              <p>Made with OpenAI Dall-e 2 API</p>
+              <p>Tailwind and React.</p>
+            </div>
+            <div className="mb-5 flex flex-row w-full md: w-md">
+              <input
+                className="p-2 font-sans w-full text-xs bg-blue bg-gray"
+                placeholder={placeholder}
+                onChange={(e) => setPrompt(e.target.value)}
+              />
+              <button
+                className="  font-sans bg-purple rounded p-2 ml-2 font-extralight transition ease-in-out delay-150 hover:bg-purple2 "
+                onClick={generateImage}
+              >
+                Generate!
+              </button>
+            </div>
+            <container className="font-sans">
+              {result.length > 0 ? (
+                <>
+                  <img className="w-1/2" src={result} alt="result" />
+                  <div>
+                    <a href={result} target="blank" download>
+                      <button className=" transition ease-in-out delay-150 w-full bg-purple font-extralight rounded p-2 mt-5 font-sans  hover:bg-purple2">
+                        Download image!
+                      </button>
+                    </a>
+                  </div>
+                </>
+              ) : (
+                <img className="w-1/2" src={previewImage} alt="result" />
+              )}
+            </container>
+          </>
+        )}
+      </div>
     </div>
   );
 }

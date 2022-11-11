@@ -1,14 +1,34 @@
 /** @type {import('tailwindcss').Config} */
-export const content = [
-  '.src/**/*.{js,ts,jsx,tsx}',
-  '.src/components/**/*.{js,ts,jsx,tsx}',
-  '/openaiark/src/**/*.{js,ts,jsx,tsx}',
-];
-export const theme = {
-  extend: {},
-  fontFamily: {
-    sans: ['Graphik', 'sans-serif'],
-    serif: ['Merriweather', 'serif'],
+module.exports = {
+  content: ['./src/**/*.{html,js}'],
+  theme: {
+    screens: {
+      sm: '584px',
+      md: '768px',
+      lg: '976px',
+      xl: '1440px',
+    },
+    colors: {
+      black: '#000000',
+      purple: '#552FDE',
+      purple2: '#2D1680',
+      white: '#FFFFFF',
+      dark: '#0E0F10',
+      gray: '#2E2C33',
+    },
+    fontFamily: {
+      sans: ['Manrope', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
+    },
+    extend: {
+      spacing: {
+        128: '32rem',
+        144: '36rem',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+      },
+    },
   },
+  plugins: [],
 };
-export const plugins = [];
