@@ -4,7 +4,7 @@ import { useState } from 'react';
 import previewImage from './img/example.png';
 import Help from './components/Help';
 import { HiOutlineExternalLink } from 'react-icons/hi';
-import { ImSpinner, ImSpinner7 } from 'react-icons/im';
+import { ImSpinner7 } from 'react-icons/im';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
   const [placeholder, setPlaceholder] = useState('Keywords...');
+  const [error, setError] = useState(false);
 
   const configuration = new Configuration({
     apiKey: process.env.REACT_APP_VERCEL_ENV,
@@ -29,9 +30,16 @@ function App() {
       });
       setLoading(false);
       setResult(res.data.data[0].url);
-    } catch (err) {
-      alert(err);
-      console.log('hello');
+    } catch (error) {
+      if (error.response) {
+        setLoading(false);
+        setError(true);
+        console.log(error.response.status);
+        console.log(error.response.data);
+      } else {
+        setLoading(false);
+        console.log(error.message);
+      }
     }
   };
 
@@ -60,6 +68,13 @@ function App() {
             <AiOutlineArrowRight className=" h-3 w-3  " />
           </button>
         </div>
+        {error ? (
+          <div className="font-sans font-extralight text-xs mb-4 bg-purple2 p-2 rounded">
+            Something went wrong. Try again!
+          </div>
+        ) : (
+          <></>
+        )}
         {loading ? (
           <>
             <div className="flex flex-col items-center justify-center w-354 h-384 ">
