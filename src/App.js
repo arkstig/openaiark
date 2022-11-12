@@ -10,9 +10,9 @@ function App() {
   const [placeholder, setPlaceholder] = useState('Keywords...');
 
   const configuration = new Configuration({
-    apiKey: process.env.REACT_APP_OPEN_AI_KEY,
+    apiKey: process.env.REACT_APP_VERCEL_ENV,
   });
-  console.log(process.env.REACT_APP_OPEN_AI_KEY);
+  console.log(process.env.REACT_APP_VERCEL_ENV);
   const openai = new OpenAIApi(configuration);
 
   const generateImage = async () => {
