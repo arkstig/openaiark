@@ -12,7 +12,6 @@ function App() {
   const configuration = new Configuration({
     apiKey: process.env.REACT_APP_VERCEL_ENV,
   });
-  console.log(process.env.REACT_APP_VERCEL_ENV);
   const openai = new OpenAIApi(configuration);
 
   const generateImage = async () => {
