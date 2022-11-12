@@ -28,6 +28,7 @@ function App() {
       setResult(res.data.data[0].url);
     } catch (err) {
       alert(err);
+      console.log('hello');
     }
   };
 
