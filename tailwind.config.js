@@ -3,7 +3,8 @@ module.exports = {
   content: ['./src/**/*.{html,js}'],
   theme: {
     screens: {
-      sm: '584px',
+      s: '440px',
+      sm: '680px',
       md: '768px',
       lg: '976px',
       xl: '1440px',
@@ -15,7 +16,6 @@ module.exports = {
       white: '#FFFFFF',
       dark: '#0E0F10',
       gray: '#2E2C33',
-      gray2: '#2E2C33',
     },
     fontFamily: {
       sans: ['Manrope', 'sans-serif'],

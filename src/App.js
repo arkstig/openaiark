@@ -1,7 +1,11 @@
 import './styles/globals.css';
 import { Configuration, OpenAIApi } from 'openai';
 import { useState } from 'react';
-import previewImage from './img/imgb.png';
+import previewImage from './img/example.png';
+import Help from './components/Help';
+import { HiOutlineExternalLink } from 'react-icons/hi';
+import { ImSpinner, ImSpinner7 } from 'react-icons/im';
+import { AiOutlineArrowRight } from 'react-icons/ai';
 
 function App() {
   const [prompt, setPrompt] = useState('');
@@ -32,46 +36,35 @@ function App() {
   };
 
   return (
-    <div className="w-full flex justify-center content-center items-center ">
-      <div className="max-w-2xl flex flex-col justify-center  p-5">
-        <h2 className="text-3xl text-left sm:font-sans font-extrabold sm:text-5xl ">
+    <div className="w-full flex justify-center content-center items-center from-stone-100  ">
+      <div className="max-w-3xl min-w-3xl flex flex-col justify-center  p-5">
+        <h2 className="text-3xl text-left sm:font-sans font-extrabold s:text-4xl sm:text-6xl ">
           A<span className="text-purple">I</span> IMAGE GENERATOR
         </h2>
-        <div className="my-5 pl-2 w-full font-sans flex flex-col items-start border-l-4 border-purple">
-          <p>Made with OpenAI Dall-e 2 API</p>
-          <p>Tailwind and React.</p>
+        <div className="my-5 pl-2 w-full font-sans text-sm flex flex-col items-start font-extralight border-l-4 border-purple">
+          <p>Made with OpenAI Dall-e 2 API, Tailwind and React.</p>
+          <p>Deployed with Vercel.</p>
         </div>
-        <div className="mt-2 mb-4 pl-2 p-4 w-full font-sans flex flex-col items-start bg-black">
-          <p className="font-sans text-xs">
-            Type in some keywords in the field under to generate a uniqe image*
-            With an AI generator.
-          </p>
-          <p className="my-2 font-sans text-xs font-extralight">
-            Example: Northern lights, winter, realistic, stars
-          </p>
-          <p className="font-sans text-xs bg-purple2 p-1">
-            *Size of the image that is generated is 1024x1024 pixels.
-          </p>
-        </div>
-        <div className="mb-5 flex flex-row w-full md: w-md">
+        <Help />
+        <div className="flex flex-col mb-5 s:flex s:flex-row w-full md: w-md">
           <input
-            className="p-2 font-sans w-full text-xs bg-blue bg-gray"
+            className="p-2 font-sans w-full text-xs bg-blue bg-white rounded text-black"
             placeholder={placeholder}
             onChange={(e) => setPrompt(e.target.value)}
           />
           <button
-            className="  font-sans bg-purple rounded p-2 ml-2 font-extralight transition ease-in-out delay-150 hover:bg-purple2 hover:text-purple "
+            className="px-4 flex flex-row items-center justify-center  font-sans bg-purple rounded p-2 ml-0 s:ml-4 font-extralight transition ease-in-out delay-150 hover:bg-purple2 hover:text-purple  "
             onClick={generateImage}
           >
-            Generate!
+            <p className="pr-2">Generate!</p>
+            <AiOutlineArrowRight className=" h-3 w-3  " />
           </button>
         </div>
         {loading ? (
           <>
-            <h2>Generating..Please Wait..</h2>
-            <div className="lds-ripple">
-              <div></div>
-              <div></div>
+            <div className="flex flex-col items-center justify-center w-354 h-384 ">
+              <h2 className="mb-20 mt-20">Generating your awesome image!</h2>
+              <ImSpinner7 className="text-purple animate-spin w-20 h-20" />
             </div>
           </>
         ) : (
@@ -79,31 +72,41 @@ function App() {
             <container className="font-sans">
               {result.length > 0 ? (
                 <>
-                  <img className="w-1/2" src={result} alt="result" />
+                  <img
+                    className="w-full sm:w-1/2 rounded"
+                    src={result}
+                    alt="result"
+                  />
+
                   <div>
                     <a href={result} target="blank" download>
-                      <button className=" transition ease-in-out delay-150 w-full bg-purple font-extralight rounded p-2 mt-5 font-sans  hover:bg-purple2 hover:text-purple">
-                        Download image!
+                      <button className="flex flex-row items-center justify-center transition ease-in-out delay-150 w-full bg-purple font-extralight rounded p-2 mt-5 font-sans  hover:bg-purple2 hover:text-purple">
+                        <p className="pr-2">Download image!</p>{' '}
+                        <HiOutlineExternalLink />
                       </button>
                     </a>
                   </div>
                 </>
               ) : (
-                <img className="w-1/2" src={previewImage} alt="result" />
+                <div>
+                  <img
+                    className="w-full sm:w-1/2 rounded"
+                    src={previewImage}
+                    alt="result"
+                  />
+                  <button
+                    disabled
+                    className=" flex flex-row items-center justify-center transition ease-in-out delay-150 w-full bg-purple2 font-extralight rounded p-2 mt-5 font-sans  hover:bg-purple2 hover:text-purple"
+                  >
+                    <p className="pr-2">Download image!</p>{' '}
+                    <HiOutlineExternalLink />
+                  </button>
+                </div>
               )}
             </container>
           </>
         )}
       </div>
-      <p className="font-sans absolute bottom-10 left-10">
-        Made by{' '}
-        <a
-          href="https://www.stigark.com"
-          className="text-purple transition ease-in-out delay-150 hover:text-purple2"
-        >
-          Stig Ark
-        </a>
-      </p>
     </div>
   );
 }
