@@ -15,6 +15,7 @@ module.exports = {
       white: '#FFFFFF',
       dark: '#0E0F10',
       gray: '#2E2C33',
+      gray2: '#2E2C33',
     },
     fontFamily: {
       sans: ['Manrope', 'sans-serif'],
