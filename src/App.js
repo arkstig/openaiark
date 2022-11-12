@@ -56,7 +56,7 @@ function App() {
         <Help />
         <div className="flex flex-col mb-5 s:flex s:flex-row w-full md: w-md">
           <input
-            className="p-2 font-sans w-full text-xs bg-blue bg-white rounded text-black"
+            className="h-10 p-2 font-sans w-full text-xs bg-blue bg-white rounded text-black"
             placeholder={placeholder}
             onChange={(e) => setPrompt(e.target.value)}
           />
@@ -77,14 +77,16 @@ function App() {
         )}
         {loading ? (
           <>
-            <div className="flex flex-col items-center justify-center w-354 h-384 ">
-              <h2 className="mb-20 mt-20">Generating your awesome image!</h2>
-              <ImSpinner7 className="text-purple animate-spin w-20 h-20" />
-            </div>
+            <container className="font-sans p-5 bg-gray2 rounded">
+              <div className="flex flex-col items-center justify-center w-354 h-384 ">
+                <h2 className="mb-20 mt-20">Generating your awesome image!</h2>
+                <ImSpinner7 className="text-purple animate-spin w-20 h-20" />
+              </div>
+            </container>
           </>
         ) : (
           <>
-            <container className="font-sans">
+            <container className="font-sans p-5 bg-gray2 rounded">
               {result.length > 0 ? (
                 <>
                   <img
@@ -92,10 +94,9 @@ function App() {
                     src={result}
                     alt="result"
                   />
-
                   <div>
                     <a href={result} target="blank" download>
-                      <button className="flex flex-row items-center justify-center transition ease-in-out delay-150 w-full bg-purple font-extralight rounded p-2 mt-5 font-sans  hover:bg-purple2 hover:text-purple">
+                      <button className="flex flex-row items-center justify-center transition ease-in-out delay-150 w-full bg-slate-100 font-extralight rounded p-2 mt-5 font-sans  hover:bg-purple2 hover:text-purple">
                         <p className="pr-2">Download image!</p>{' '}
                         <HiOutlineExternalLink />
                       </button>
@@ -109,13 +110,13 @@ function App() {
                     src={previewImage}
                     alt="result"
                   />
-                  <button
+                  {/* <button
                     disabled
                     className=" flex flex-row items-center justify-center transition ease-in-out delay-150 w-full bg-purple2 font-extralight rounded p-2 mt-5 font-sans  hover:bg-purple2 hover:text-purple"
                   >
                     <p className="pr-2">Download image!</p>{' '}
                     <HiOutlineExternalLink />
-                  </button>
+                  </button> */}
                 </div>
               )}
             </container>
