@@ -16,15 +16,19 @@ function App() {
   const openai = new OpenAIApi(configuration);
 
   const generateImage = async () => {
-    setPlaceholder(`Search ${prompt}..`);
-    setLoading(true);
-    const res = await openai.createImage({
-      prompt: prompt,
-      n: 1,
-      size: '1024x1024',
-    });
-    setLoading(false);
-    setResult(res.data.data[0].url);
+    try {
+      setPlaceholder(`Search ${prompt}..`);
+      setLoading(true);
+      const res = await openai.createImage({
+        prompt: prompt,
+        n: 1,
+        size: '1024x1024',
+      });
+      setLoading(false);
+      setResult(res.data.data[0].url);
+    } catch (err) {
+      alert(err);
+    }
   };
 
   return (
