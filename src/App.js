@@ -11,7 +11,7 @@ function App() {
   const [prompt, setPrompt] = useState('');
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
-  const [placeholder, setPlaceholder] = useState('Keywords...');
+  const [placeholder, setPlaceholder] = useState(['Keywords...']);
   const [error, setError] = useState(false);
 
   const configuration = new Configuration({
@@ -22,7 +22,7 @@ function App() {
   const generateImage = async (event) => {
     event.preventDefault();
     try {
-      setPlaceholder(`Search ${prompt}..`);
+      setPlaceholder([`You searched for: ${prompt}`]);
       setLoading(true);
       const res = await openai.createImage({
         prompt: prompt,
@@ -93,14 +93,27 @@ function App() {
               </>
             ) : (
               <>
-                <div className="font-sans p-5 bg-gray2 rounded">
+                <div className="flex flex-col font-sans p-5 bg-gray2 rounded">
                   {result.length > 0 ? (
                     <>
-                      <img
-                        className="w-full sm:w-1/2 rounded"
-                        src={result}
-                        alt="result"
-                      />
+                      <div className="flex flex-col sm:flex-row">
+                        <img
+                          className="w-full sm:w-1/2 rounded"
+                          src={result}
+                          alt="result"
+                        />
+                        <ul className="sm:ml-16 flex flex-column">
+                          {placeholder.map((words, index) => {
+                            return (
+                              <li className="" key={index}>
+                                <p className="text-white text-sans font-extralight">
+                                  {words}
+                                </p>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
                       <div>
                         <a href={result} target="blank" download>
                           <button className="flex flex-row items-center justify-center  bg-purple transition ease-in-out delay-150 w-full font-extralight rounded p-2 mt-5 font-sans  hover:bg-purple2 hover:text-white">
@@ -112,11 +125,24 @@ function App() {
                     </>
                   ) : (
                     <div>
-                      <img
-                        className="w-full sm:w-1/2 rounded"
-                        src={previewImage}
-                        alt="result"
-                      />
+                      <div className="flex flex-col sm:flex-row">
+                        <img
+                          className="w-full sm:w-1/2 rounded"
+                          src={previewImage}
+                          alt="result"
+                        />
+                        <ul className="sm:ml-16 flex flex-column">
+                          {placeholder.map((words, index) => {
+                            return (
+                              <li className="" key={index}>
+                                <p className="text-white text-sans font-extralight">
+                                  {words}
+                                </p>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
                       {/* <button
                     disabled
                     className=" flex flex-row items-center justify-center transition ease-in-out delay-150 w-full bg-purple2 font-extralight rounded p-2 mt-5 font-sans  hover:bg-purple2 hover:text-purple"
