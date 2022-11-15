@@ -11,7 +11,9 @@ function App() {
   const [prompt, setPrompt] = useState('');
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
-  const [placeholder, setPlaceholder] = useState(['Keywords...']);
+  const [placeholder, setPlaceholder] = useState([
+    'Keywords example: Northern Lights Winter Stars Norway ',
+  ]);
   const [error, setError] = useState(false);
 
   const configuration = new Configuration({
@@ -49,9 +51,9 @@ function App() {
       <div className="h-screen bg-gradient-to-b from-dark to-dark2 w-full flex justify-center items-start">
         <div className="max-w-3xl min-w-3xl flex flex-col justify-center  p-5">
           <header>
-            <h2 className="text-3xl text-left sm:font-sans font-extrabold s:text-4xl sm:text-6xl ">
+            <h1 className="text-3xl text-left sm:font-sans font-extrabold s:text-4xl sm:text-6xl ">
               A<span className="text-purple">I</span> IMAGE GENERATOR
-            </h2>
+            </h1>
             <div className="my-5 pl-2 w-full font-sans text-sm flex flex-col items-start font-extralight border-l-4 border-purple">
               <p>Made with OpenAI Dall-e 2 API, Tailwind and React.</p>
               <p>Deployed with Vercel.</p>
@@ -64,7 +66,9 @@ function App() {
                 className="h-10 p-2 font-sans w-full text-base bg-blue bg-white rounded text-black"
                 placeholder={placeholder}
                 onChange={(e) => setPrompt(e.target.value)}
+                id="text"
               />
+              <label for="text"></label>
               <button
                 className="px-4 flex flex-row items-center justify-center  font-sans bg-purple rounded p-2 ml-0 s:ml-4 font-extralight transition ease-in-out delay-150 hover:bg-purple2 hover:text-white "
                 onClick={generateImage}
@@ -163,7 +167,7 @@ function App() {
           {' '}
           Made by
           <a
-            className="ml-1 transition ease-in-out delay-150 text-purple hover:text-white"
+            className="ml-1 transition ease-in-out delay-150 px-2 p-1 rounded bg-purple text-white hover:bg-purple2"
             href="https://www.stigark.com"
           >
             Stig Ark
